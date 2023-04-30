@@ -62,8 +62,9 @@ Press CTRL+C to quit
 Now you should be able to see the chatbot on your localhost:5000.
 ## ngrok Server
 If you would like to see the flask server outside of your local host, one easy method is using ***ngrok***.\
-To start an ngrok server, you can sign up for a free account on their website https://ngrok.com.\
+To start an ngrok server, you can sign up for a free account on their website https://ngrok.com \
 Then you can download ngrok to your specifc os. (Using linux as example) \
+\
 You can unzip ngrok by:
 ```bash
 unzip /path/to/ngrok.zip
