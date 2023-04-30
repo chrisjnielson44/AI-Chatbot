@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Set the OpenAI API key
 openai.api_key = os.getenv("YOUR_OPENAI_API_KEY")
-
 #  Define the function to generate the response from the AI
 def generate_response(prompt):
     response = openai.Completion.create(
@@ -24,6 +24,8 @@ def generate_response(prompt):
 conversation_file = "conversation.txt"
 
 # Create the file if it doesn't exist
+dir_path = os.path.dirname(os.path.abspath(__file__))
+conversation_file = os.path.join(dir_path, "conversation.txt")
 if not os.path.exists(conversation_file):
     with open(conversation_file, "w") as f:
         f.write("")
@@ -42,3 +44,7 @@ while True:
     with open(conversation_file, "a") as f:
         f.write(user_input + "\n")
         f.write(response + "\n")
+
+# Clear the conversation file
+with open(conversation_file, "w") as f:
+    f.write("")
