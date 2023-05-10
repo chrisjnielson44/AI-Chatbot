@@ -36,6 +36,7 @@ if not os.path.exists(conversation_file):
 print("AI: Hello, I am an AI chatbot. I am very smart. Ask me anything! If you want to stop talking to me, just type 'exit'.")
 
 conversation_history = ""
+
 while True:
     user_input = input("You: ")
     # Exit when the user says "exit"

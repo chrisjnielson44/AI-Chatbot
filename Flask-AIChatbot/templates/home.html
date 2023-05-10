@@ -101,16 +101,28 @@
 	</style>
 </head>
 <body>
-	<h1>OpenAI Chatbot</h1>
-	<h2>Chat history:</h2>
-	<pre>{{ conversation_history }}</pre>
-	<form method="post">
-		<label for="user_input">You:</label>
-		<input type="text" name="user_input">
-		<input type="hidden" name="conversation_history" value="{{ conversation_history }}">
-		<input type="submit" value="Send">
-		<button type="submit" name="action" value="exit">Clear</button>
-		<input type="hidden" name="conversation_history" value="{{ conversation_history }}">
-	</form>
+    <h1>OpenAI Chatbot</h1>
+    <h2>Chat history:</h2>
+    <pre>{{ conversation_history }}</pre>
+    <form method="post">
+        <label for="user_input">You:</label>
+        <input type="text" name="user_input" id="user_input">
+        <input type="hidden" name="conversation_history" value="{{ conversation_history }}">
+        <input type="submit" value="Send">
+        <button type="submit" name="action" value="exit">Clear</button>
+        <input type="hidden" name="submit_hotkey" id="submit_hotkey" value="false">
+    </form>
+    <script>
+        const textarea = document.getElementById("user_input");
+        textarea.addEventListener("keydown", (event) => {
+            if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
+                document.getElementById("submit_hotkey").value = "true";
+                event.preventDefault();
+                event.stopPropagation();
+                event.target.form.submit();
+            }
+        });
+    </script>
+	
 </body>
 </html>

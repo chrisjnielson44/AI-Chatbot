@@ -52,15 +52,17 @@ def home():
                 f.write("")
             return render_template("home.html")
 
-        prompt = f"You say: {user_input}\nAI says:"
-        response = generate_response(prompt, conversation_history)
-        conversation_history += f"\nUser: {user_input}\nAI: {response}"
+        # Check if user pressed "cmd + Enter" or "windows key + Enter"
+        if request.form.get("submit_hotkey"):
+            prompt = f"You say: {user_input}\nAI says:"
+            response = generate_response(prompt, conversation_history)
+            conversation_history += f"\nUser: {user_input}\nAI: {response}"
+            with open(conversation_file, "a") as f:
+                f.write(user_input + "\n")
+                f.write(response + "\n")
+            return render_template("home.html", response=response, conversation_history=conversation_history)
 
-        with open(conversation_file, "a") as f:
-            f.write(user_input + "\n")
-            f.write(response + "\n")
-
-        return render_template("home.html", response=response, conversation_history=conversation_history)
+        return render_template("home.html", conversation_history=conversation_history, user_input=user_input)
 
 
 if __name__ == '__main__':
